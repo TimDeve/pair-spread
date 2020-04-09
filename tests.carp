@@ -1,0 +1,18 @@
+(load "Test.carp")
+(load "pair-spread.carp")
+
+(use Test)
+
+(defn get-a [p]
+  (Pair.spread [a _ p]
+    a))
+
+(defn bamSup []
+  (Pair.spread [one two (Pair.init @"Hello" @"Sup")]
+    (String.concat &[(get-a (Pair.init @"Bam" @"Bim")) two])))
+
+(deftest test
+  (assert-equal test
+                "BamSup"
+                &(bamSup)
+                "should make pair fields available in form"))

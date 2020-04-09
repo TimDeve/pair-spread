@@ -1,0 +1,19 @@
+(defmodule Unsafe
+  (defn unsafe-deref [r]
+    (Pointer.to-value
+      (the (Ptr a)
+           (Unsafe.coerce (the (Ref a) r))))))
+
+(defmodule Pair
+  (defmacro spread [settings body] ;; settings = a, b, pair
+    (let [a (car settings)
+          b (cadr settings)
+          pair (caddr settings)]
+      (list 'let (array 'pair-let pair)
+        (list
+          'let-do (array
+                    a (list 'Unsafe.unsafe-deref (list 'Pair.a (list ref 'pair-let)))
+                    b (list 'Unsafe.unsafe-deref (list 'Pair.b (list ref 'pair-let))))
+           (list 'Unsafe.leak 'pair-let)
+           body)))))
+
