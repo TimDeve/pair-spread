@@ -7,12 +7,12 @@
   (Pair.spread [a _ p]
     a))
 
-(defn bamSup []
+(defn bam-sup []
   (Pair.spread [one two (Pair.init @"Hello" @"Sup")]
     (String.concat &[(get-a (Pair.init @"Bam" @"Bim")) two])))
 
 (deftest test
   (assert-equal test
                 "BamSup"
-                &(bamSup)
+                &(bam-sup)
                 "should make pair fields available in form"))

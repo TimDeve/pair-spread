@@ -12,8 +12,8 @@
       (list 'let (array 'pair-let pair)
         (list
           'let-do (array
-                    a (list 'Unsafe.unsafe-deref (list 'Pair.a (list ref 'pair-let)))
-                    b (list 'Unsafe.unsafe-deref (list 'Pair.b (list ref 'pair-let))))
+                    a (list 'Unsafe.unsafe-deref (list 'Pair.a (list 'ref 'pair-let)))
+                    b (list 'Unsafe.unsafe-deref (list 'Pair.b (list 'ref 'pair-let))))
            (list 'Unsafe.leak 'pair-let)
            body)))))
 
